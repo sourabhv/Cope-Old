@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/webfonts.css">
+	<link id="theme-css" rel="stylesheet" href="{{ STATIC_URL }}css/search-day.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css" />
+	<script src="{{ STATIC_URL }}js/jquery.js"></script>
+	<title>Library Search | Cope</title>
+</head>
+<body>
+	<div id="container">
+		<div id="logo">
+			<h1>COPE</h1>
+		</div>
+		<form action="" method="get" id="search-form">
+			<input type="text" name='q' id='q' placeholder="Search a book">
+			<span class="icon-search"></span>
+		</form>
+	</div>
+
+	<span id="theme-button"><i class="icon-moon"></i></span>
+
+	<script src="{{ STATIC_URL }}js/search-script.js"></script>
+</body>
+</html>

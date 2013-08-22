@@ -1,0 +1,62 @@
+{% load bookdetailextras %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Book Results | Cope</title>
+
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/webfonts.css">
+	<link id="theme-css" rel="stylesheet" href="{{ STATIC_URL }}css/search-results-day.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css" />
+
+	<script src="{{ STATIC_URL }}js/jquery.js"></script>
+
+</head>
+
+<body>
+	<header>
+		<div id="header-container">
+			<a href="/" id="home-button"><i class="icon-home"></i></a>
+			<form action="" method="get">
+				<input type="text" name="q" id="q" value="{{ q }}"  placeholder="Search a book">
+				<span class="icon-search"></span>
+				<!-- <i id="theme-button" class="icon-moon"></i> -->
+			</form>
+		</div>
+	</header>
+
+	<div id="book-container">
+
+		{% if bookexists %}
+
+		{% for book in books %}
+		<a href="/search/book/{{ book.pk }}">
+			<div class="book-frame">
+				<div class="book-inner-frame">
+					{% if book.imageurl %}
+					<img src="{{ STATIC_URL|add:'images/'|add:book.imageurl|file_exists }}" alt="{{book.title}} Cover Photo">
+					{% else %}
+					<img src="{{ STATIC_URL}}images/image.png" alt="{{book.title}} Cover Photo">
+					{% endif %}
+
+					<div class="book-details">
+						<div><div><i class="icon-user"></i></div>{{ book.authors }}</div>
+						<div><div><i class="icon-file-text"></i></div>Edition: {{ book.edition }}</div>
+						<div><div><i class="icon-truck"></i></div>{{ book.publisher }}</div>
+						<div><div><i class="icon-copy"></i></div>{{ book.pages }}</div>
+						<div><div><i class="icon-calendar"></i></div>{{ book.date }}</div>
+					</div>
+				</div>
+				<div class="book-name">{{book.title}}</div>
+			</div>
+		</a>
+		{% endfor %}
+
+		{% else %}
+		<h3>Found no results for "{{q}}"</h3>
+		{% endif %}
+	</div>
+
+	<script src="{{ STATIC_URL }}js/search-result-script.js"></script>
+</body>
+</html>

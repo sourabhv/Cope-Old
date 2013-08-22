@@ -1,0 +1,39 @@
+@font-face {
+	font-family: '47';
+	src: url('../webfonts/47.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'icons';
+	src: url('../webfonts/icons.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'league gothic';
+	src: url('../webfonts/league gothic.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'open sans';
+	src: url('../webfonts/open sans.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'track';
+	src: url('../webfonts/track.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'ubuntu';
+	src: url('../webfonts/ubuntu.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'ubuntu mono';
+	src: url('../webfonts/ubuntu mono.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'font awesome';
+	src: url('../wenfonts/font awesome.ttf') format('truetype');
+}
