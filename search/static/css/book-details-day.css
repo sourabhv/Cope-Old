@@ -25,7 +25,6 @@ header {
 	width: 80%;
 	margin: 0 auto;
 	text-align: center;
-	padding: 5px;
 }
 
 #home-button {
@@ -45,7 +44,6 @@ form {
 	min-width: 300px;
 	max-width: 600px;
 	width: 50%;
-	margin: 0;
 	display: inline-block;
 	position: relative;
 }
@@ -53,7 +51,8 @@ form {
 #q {
 	width: 100%;
 	margin: 0;
-	padding: 0.6em;
+	height: 45px;
+	padding: 5px 30px 5px 10px;
 	outline: 0;
 	background: #FCFCFC;
 	font: bold 1em/1.4em 'open sans', sans-serif;
@@ -87,10 +86,10 @@ form .icon-search {
 	width: 70%;
 	margin: 40px auto;
 	background-color: #F8F5F5;
-	box-shadow: 0 0 12px rgba(0,0,0,.2);
+	box-shadow: 0 0 20px rgba(0,0,0,.3);
 }
 
-#container {
+/*#container {
   position: relative;
 }
 
@@ -122,7 +121,7 @@ form .icon-search {
   transform: rotate(3deg);
   right: 10px;
   left: auto;
-}
+}*/
 
 #left {
 	padding: 20px 30px;
