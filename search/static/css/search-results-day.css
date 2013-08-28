@@ -4,9 +4,8 @@ html, body {
 
 body {
 	margin: 0;
-	padding: 20px 5px 0;
+	padding: 5px;
 	background-color: #F8F5F5;
-	position: relative;
 }
 
 
@@ -20,31 +19,22 @@ body * {
 }
 
 header {
-	height: 2.40em;
+	margin-top: 20px;
 }
 
 #header-container {
 	width: 80%;
 	margin: 0 auto;
-	height: 2.40em;
 	text-align: center;
-}
-
-#site-name {
-	font: normal 1.5em/1.5em '47', sans-serif;
-	display: inline-block;
-	color: #888;
-	letter-spacing: .15em;
-	margin: 0 20px 0 10px;
 }
 
 #home-button {
 	display: inline-block;
 	padding: 6px 20px;
 	font-size: 25px;
-	border-radius: 1px;
-	color: #d9d6d6;
+	color: #D9D6D6;
 	text-decoration: none;
+	vertical-align: bottom;
 }
 
 #home-button:hover {
@@ -62,7 +52,8 @@ form {
 #q {
 	width: 100%;
 	margin: 0;
-	padding: 0.6em;
+	height: 45px;
+	padding: 5px 30px 5px 10px;
 	outline: 0;
 	background: #FCFCFC;
 	font: bold 1em/1.4em 'open sans', sans-serif;
@@ -80,7 +71,7 @@ form {
 }
 
 #q:focus {
-	box-shadow: 0 0 40px rgba(0,0,0,.3);
+	box-shadow: 0 0 30px rgba(0,0,0,.3);
 	border: 2px solid #AAA;
 	color: #555;
 }
@@ -114,11 +105,13 @@ form .icon-search {
 
 .book-frame{
 	display: inline-block;
-	width: 300px; height: 400px;
+	overflow: hidden;
+	width: 225px; height: 300px;
 	background-color: white;
 	padding: 10px;
+	vertical-align: bottom;
 	box-shadow: 0 0 3px rgba(0, 0, 0, .2),
-	            inset 0 0 12px rgba(0, 0, 0, .4);
+				inset 0 0 12px rgba(0, 0, 0, .4);
 }
 
 .book-inner-frame {
@@ -137,11 +130,11 @@ form .icon-search {
 }
 
 .book-frame:hover .book-inner-frame img {
-	-webkit-transform: scale(1.5,1.5);
-	   -moz-transform: scale(1.5,1.5);
-	    -ms-transform: scale(1.5,1.5);
-	     -o-transform: scale(1.5,1.5);
-	        transform: scale(1.5,1.5);
+	-webkit-transform: scale(1.5, 1.5);
+	   -moz-transform: scale(1.5, 1.5);
+		-ms-transform: scale(1.5, 1.5);
+		 -o-transform: scale(1.5, 1.5);
+			transform: scale(1.5, 1.5);
 }
 
 .book-details {
@@ -153,9 +146,9 @@ form .icon-search {
 	background-color: rgba(248, 245, 245, 0.5);
 	-webkit-transition: margin-left .5s;
 	   -moz-transition: margin-left .5s;
-	    -ms-transition: margin-left .5s;
-	     -o-transition: margin-left .5s;
-	        transition: margin-left .5s;
+		-ms-transition: margin-left .5s;
+		 -o-transition: margin-left .5s;
+			transition: margin-left .5s;
 }
 
 .book-frame:hover .book-details {
@@ -163,23 +156,26 @@ form .icon-search {
 }
 
 .book-details > div {
-	background-color: white;
-	border-radius: 5px;
-	overflow: hidden;
-	height: 35px;
+	height: 30px;
 	width: 85%;
-	padding-right: 10px;
-	color: #666;
 	margin: 1em;
+	padding-right: 10px;
+	overflow: hidden;
+	background-color: white;
+	font: normal 0.9em/100% 'ubuntu mono', sans-serif;
+	border-radius: 5px;
+	color: #444;
 }
 
 .book-details > div > div {
-	padding: 7px 10px;
-	height: 35px; width: 35px;
-	background-color: #579ffe;
-	color: white;
-	margin-right: 10px;
 	display: inline-block;
+	height: 30px; width: 30px;
+	margin-right: 10px;
+	padding: 7px;
+	font-size: 1.2em;
+	background-color: #579FFE;
+	color: white;
+	text-align: center;
 }
 
 .book-name {
@@ -187,6 +183,6 @@ form .icon-search {
 	margin: 0;
 	padding-top: 5px;
 	color: #888;
-	font: normal 0.9em/2.5em 'track';
+	font: normal 0.9em/2em 'track';
 	overflow: hidden;
 }
