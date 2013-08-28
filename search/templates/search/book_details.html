@@ -4,7 +4,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ book.title }} | Cope</title>
-	<link rel="icon" type="image/png" href="{{ STATIC_URL}}images/favicon.png">
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/webfonts.css">
 	<link id="theme-css" rel="stylesheet" href="{{ STATIC_URL }}css/book-details-day.css">
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css" />
@@ -18,6 +17,7 @@
 			<form action="/search/" method="get">
 				<input type="text" name="q" id="q" value="{{ q }}"  placeholder="Search a book">
 				<span class="icon-search"></span>
+				<!-- <i id="theme-button" class="icon-moon"></i> -->
 			</form>
 		</div>
 	</header>

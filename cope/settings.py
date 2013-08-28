@@ -116,7 +116,7 @@ ROOT_URLCONF = 'cope.urls'
 WSGI_APPLICATION = 'cope.wsgi.application'
 
 TEMPLATE_DIRS = (
-	os.path.join(os.path.join(PROJECT_PATH, 'cope'), 'templates'),
+	os.path.join(os.path.join(PROJECT_PATH, 'search'), 'template'),
 )
 
 DJANGO_APPS = (

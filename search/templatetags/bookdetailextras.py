@@ -9,4 +9,4 @@ def file_exists(file_rel_path):
 	if default_storage.exists(path+file_rel_path):
 		return file_rel_path
 	else:
-		return '/static/images/image.png'
+		return 'image.png'
