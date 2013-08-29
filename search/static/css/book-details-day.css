@@ -34,6 +34,7 @@ header {
 	border-radius: 1px;
 	color: #d9d6d6;
 	text-decoration: none;
+	vertical-align: bottom;
 }
 
 #home-button:hover {
