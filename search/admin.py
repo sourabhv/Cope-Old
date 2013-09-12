@@ -2,6 +2,25 @@ from django.contrib import admin
 from search.models import Book, Author, Enduser, IssuedBook, Student, Employee
 
 class BookAdmin(admin.ModelAdmin):
+	fieldsets = (
+		('Book Info', {
+			'fields': ('title', 'edition', 'isbn', 'ddc', 'book_no',),
+			# 'readonly_fields': ('date'),
+		}),
+		('Author and Publisher', {
+			'fields': ('author', 'publisher', 'publish_date', 'publish_place',),
+		}),
+		('Other Information', {
+			'fields': ('pages', 'cost', 'copies', 'source', 'imageurl', 'remarks',),
+		}),
+	)
+
+	# ordering and display of fields in edit/add form. Can reorder and hide fields
+	# fields = ('',)
+
+	# readonly fields in edit/add form
+	# readonly_fields=('',)
+
 	# Order and names of fields displayed in list
 	list_display = ('title', 'isbn', 'ddc', 'authors', 'publisher')
 
@@ -20,8 +39,6 @@ class BookAdmin(admin.ModelAdmin):
 	# used to create filter on right side of page
 	list_filter = ('date',)
 
-	# ordering and display of fields in edit form. Can reorder and hide fields
-	# fields = ('',)
 
 class AuthorAdmin(admin.ModelAdmin):
 	list_display = ('name', 'email', 'website')

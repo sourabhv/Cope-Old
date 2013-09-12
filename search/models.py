@@ -26,7 +26,7 @@ class Book(models.Model):
 	publish_date = models.DateTimeField(null=True, blank=True)
 	publish_place = models.CharField(max_length=50, blank=True)
 
-	source = models.CharField(max_length=50)
+	source = models.CharField(max_length=50, blank=True)
 	pages = models.IntegerField(default=0)
 	cost = models.IntegerField()
 	copies = models.IntegerField(default=0)

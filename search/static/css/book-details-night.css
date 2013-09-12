@@ -1,105 +1,75 @@
 body {
 	background:rgb(44,62,88);
-    margin-left: 20px;
-    padding-right: 0px;
+	margin-left: 20px;
+	padding-right: 0px;
 }
 
 #container
 {
-    height:90%;
-    width:90%;
-    position:absolute;
+	height:90%;
+	width:90%;
+	position:absolute;
 }
 
 h1
 {
-    font-size: 2.5em;
-    font-family: League Gothic;
-    float: left;
-    margin-left: 45%;
-    position: absolute;
+	font-size: 2.5em;
+	font-family: League Gothic;
+	float: left;
+	margin-left: 45%;
+	position: absolute;
 }
 
 
 #book_info
 {
-    height:95%;
-    width:35%;
-    background-color:rgb(52,73,95);
-    float: left;
+	height:95%;
+	width:35%;
+	background-color:rgb(52,73,95);
+	float: left;
 }
 
 .cover
 {
-    width: 80%;
-    height:500px;
-    margin: 15px 900px;
-    margin-left: 45px;
+	width: 80%;
+	height:500px;
+	margin: 15px 900px;
+	margin-left: 45px;
 }
 
-.author 
+.author
 {
-    margin-left: 45px;
-    margin-top: 20px; 
-    margin-right: 900px;
-    font-size: 25px;
+	margin-left: 45px;
+	margin-top: 20px;
+	margin-right: 900px;
+	font-size: 25px;
 }
 
 .publisher
 {
-    margin: 20px 900px 10px 45px;
-    font-size: 20px;
+	margin: 20px 900px 10px 45px;
+	font-size: 20px;
 }
 
 .content
 {
-    display: block;
-    margin-left: 40%;
-    margin-top: 10%;
-    width: 55%;
-    height: 90%;
+	display: block;
+	margin-left: 40%;
+	margin-top: 10%;
+	width: 55%;
+	height: 90%;
 }
 
 .copies
 {
-    display: block;
-    margin-top: 50px;
-    margin-left: 10%;
-    margin-bottom: 0px;
+	display: block;
+	margin-top: 50px;
+	margin-left: 10%;
+	margin-bottom: 0px;
 }
 
-@font-face
-{
-font-family: font1;
-src: url('webfont/Track.ttf');
-}
-
-@font-face {
-  font-family: 'icon';
-  src: url('webfont/fontello.eot?') format('eot'),
-  url('webfont/fontello.woff') format('woff'),
-  url('webfont/fontello.ttf')  format('truetype'),
-  url('webfont/fontello.svg') format('svg');
-}
-       
 .icon {
   margin-left: -23px;
   font-family: 'icon';
   color: #aaaaaa;
-}
-@font-face {
-  font-family: 'League Gothic';
-  src: url('webfont/leaguegothic-regular.ttf')  format('truetype');
-}
-@font-face {
-  font-family: '47';
-  src: url('webfont/47-Bold.ttf')  format('truetype');
-}
-
-@font-face {
-  font-family: 'symbols';
-  src: url('webfont/font/fontello.eot?') format('eot'),
-  url('webfont/font/fontello.woff') format('woff'),
-  url('webfont/font/fontello.ttf')  format('truetype'),
-  url('webfont/font/fontello.svg') format('svg');
 }
