@@ -1,9 +1,10 @@
 import re
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
 
-from search.models import *
+from opac.models import *
 
 def forward(request):
 	return HttpResponseRedirect('search/')
@@ -59,15 +60,15 @@ def index(request):
 		if book_list:
 			bookexists = True
 
-		return render (request, 'search/search_results.html', {
+		return render (request, 'opac/search_results.html', {
 			'books': book_list,
 			'q': query_string,
 			'bookexists': bookexists
 		})
 
 	else:
-		return render(request, 'search/search.html')
+		return render(request, 'opac/search.html')
 
 def get_book(request, book_id):
 	book = Book.objects.get(pk=book_id)
-	return render(request, 'search/book_details.html', {'book' : book})
+	return render(request, 'opac/book_details.html', {'book' : book})

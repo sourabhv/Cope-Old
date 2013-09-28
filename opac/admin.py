@@ -1,5 +1,5 @@
 from django.contrib import admin
-from search.models import Book, Author, Enduser, IssuedBook, Student, Employee
+from opac.models import *
 
 class BookAdmin(admin.ModelAdmin):
 	fieldsets = (
