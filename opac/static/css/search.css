@@ -1,0 +1,491 @@
+/*
+****************************************
+-------  font faces
+****************************************
+*/
+
+@font-face {
+	font-family: '47';
+	src: url('../webfonts/47.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'voltaire';
+	src: url('../webfonts/voltaire.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'track';
+	src: url('../webfonts/track.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'ubuntu mono';
+	src: url('../webfonts/ubuntu mono.ttf') format('truetype');
+}
+
+/* *********************************************** */
+
+html, body, #container {
+	height: 100%;
+}
+
+body {
+	overflow: hidden;
+	background-color: #DDD;
+	margin: 0; padding: 0;
+}
+
+body * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#container {
+	position: relative;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/*
+****************************************
+-------  #logo
+****************************************
+*/
+
+#logo {
+	padding: 70px 0;
+	background-color: white;
+	text-align: center;
+	overflow: hidden;
+	-webkit-transition: height 1s;
+	   -moz-transition: height 1s;
+	    -ms-transition: height 1s;
+	     -o-transition: height 1s;
+	        transition: height 1s;
+}
+
+#logo h1 {
+	color: #579FFE;
+	padding-top: 30px;
+	font: bold 150px/150px '47', serif;
+	letter-spacing: 10px;
+	margin: 0;
+}
+
+#logo h3 {
+	color: #444;
+	padding-top: 20px;
+	font: normal 40px/45px 'voltaire', serif;
+	margin: 0;
+}
+
+/*
+****************************************
+-------  header
+****************************************
+*/
+
+header {
+	width: 100%;
+	margin-top: 30px;
+	text-align: center;
+}
+
+/*
+****************************************
+-------  header search-bar
+****************************************
+*/
+
+#search-bar {
+	display: inline-block;
+	min-width: 500px;
+	max-width: 700px;
+	width: 45%;
+	position: relative;
+	vertical-align: top;
+}
+
+/* *********************************************** */
+
+#q {
+	padding: 13px 30px 13px 15px;
+	height: 46px;
+	font: normal 18px/24px 'ubuntu mono', sans-serif;
+	width: 100%;
+	border: 2px solid transparent;
+	background-color: #FCFCFC;
+	color: #AAA;
+	outline: 0;
+
+	-webkit-transition: border 0.25s, box-shadow 0.25s, color 0.25s, font-weight 0.25s;
+	-moz-transition: border 0.25s, box-shadow 0.25s, color 0.25s, font-weight 0.25s;
+	-o-transition: border 0.25s, box-shadow 0.25s, color 0.25s, font-weight 0.25s;
+	-ms-transition: border 0.25s, box-shadow 0.25s, color 0.25s, font-weight 0.25s;
+	transition: border 0.25s, box-shadow 0.25s, color 0.25s, font-weight 0.25s;
+}
+
+#q:focus {
+	box-shadow: 0 0 20px rgba(0,0,0,.3);
+	border: 2px solid #AAA;
+	color: #555;
+}
+
+/* *********************************************** */
+
+.icon-search {
+	position: absolute;
+	color: #999;
+	font-size: 1em;
+	top: .9em; right: 10px;
+}
+
+/*
+****************************************
+-------  header button
+****************************************
+*/
+
+header button {
+	margin: 0 0 0 10px;
+	padding: 0 40px;
+	vertical-align: top;
+	height: 42px;
+	border: none;
+	border-radius: 3px;
+	font-size: 14px;
+	font-family: 'ubuntu mono', sans-serif;
+	background-color: #579FFE;
+	box-shadow: 0 4px #348CFF;
+	color: white;
+	letter-spacing: 1px;
+}
+
+
+header button:active {
+	box-shadow: none;
+	vertical-align: bottom;
+}
+
+/*
+****************************************
+-------  #view-buttons
+****************************************
+*/
+
+#view-buttons {
+	display: inline-block;
+	margin: 3px 10px 3px 0;
+	height: 40px;
+	vertical-align: top;
+}
+
+#view-buttons * {
+	float: left;
+	overflow: hidden;
+}
+
+
+#view-buttons div {
+	height: 100%;
+	font-size: 20px;
+	padding: 10px 10px;
+	cursor: pointer;
+	color: #888;
+}
+
+#view-buttons div:hover {
+	box-shadow: 0 5px 0 0 #888;
+}
+
+#view-buttons div.active {
+	color: #348CFF;
+}
+
+#view-buttons div.active:hover {
+	box-shadow: 0 5px 0 0 #348CFF;
+}
+
+/*
+****************************************
+-------  #book-container
+****************************************
+*/
+
+#book-container {
+	margin: 35px auto;
+	width: 80%;
+	min-height: 800px;
+	padding: 0;
+	text-align: center;
+}
+
+#book-container.list {
+	border-radius: 7px;
+	overflow: hidden;
+}
+
+/* *********************************************** */
+
+.book-frame{
+	display: inline-block;
+	overflow: hidden;
+	margin: 1em;
+	padding: 10px;
+	cursor: pointer;
+	vertical-align: bottom;
+	background-color: white;
+	box-shadow: 0 0 3px rgba(0, 0, 0, .2), inset 0 0 12px rgba(0, 0, 0, .4);
+	-webkit-transition: width .25s, height .25s;
+	   -moz-transition: width .25s, height .25s;
+	    -ms-transition: width .25s, height .25s;
+	     -o-transition: width .25s, height .25s;
+	        transition: width .25s, height .25s;
+}
+
+/* view css */
+.tile-small .book-frame {
+	width: 225px; height: 300px;
+}
+
+.tile-large .book-frame {
+	width: 300px; height: 400px;
+}
+
+.list .book-frame {
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: 100%; height: 100px;
+	border-bottom: 1px solid #e0e0e0;
+	box-shadow: none;
+}
+
+.list .book-frame:nth-child(2n+1) { background-color: white; }
+.list .book-frame:nth-child(2n+2) { background-color: #F0F3F5; }
+
+
+/* *********************************************** */
+
+.book-inner-frame {
+	position: relative;
+	overflow: hidden;
+	height: 90%; width: 100%;
+}
+
+.book-inner-frame img {
+	height: 100%; width: 100%;
+	-webkit-transition: -webkit-transform .5s, margin .5s;
+	-moz-transition: -moz-transform .5s, margin .5s;
+	-ms-transition: -ms-transform .5s, margin .5s;
+	-o-transition: -o-transform .5s, margin .5s;
+	transition: transform .5s, margin .5s;
+}
+
+.book-frame:hover .book-inner-frame img {
+	margin-left: 100%;
+}
+
+/* view css */
+.list .book-inner-frame {
+	height: 100%;
+	background-color: transparent;
+	padding: 10px;
+}
+
+.list .book-inner-frame img {
+	width: auto;
+	float: left;
+	display: none;
+}
+
+.list .book-frame:hover .book-inner-frame img {
+	-webkit-transform: none;
+	   -moz-transform: none;
+	    -ms-transform: none;
+	     -o-transform: none;
+	        transform: none;
+}
+
+
+/* *********************************************** */
+
+.book-details {
+	position: absolute;
+	margin-left: -100%;
+	top: 0; left: 0;
+	height: 100%; width: 100%;
+	text-align: left;
+	background-color: white;
+	-webkit-transition: margin-left .5s;
+	   -moz-transition: margin-left .5s;
+		-ms-transition: margin-left .5s;
+		 -o-transition: margin-left .5s;
+			transition: margin-left .5s;
+}
+
+.book-frame:hover .book-details {
+	margin-left: 0;
+}
+
+/* view css */
+.list .book-details {
+	position: static;
+	margin: 0 auto;
+	width: 90%;
+	background-color: transparent;
+	-webkit-transition: none;
+	   -moz-transition: none;
+	    -ms-transition: none;
+	     -o-transition: none;
+	        transition: none;
+}
+
+.list .book-frame:hover .book-details {
+	margin: 0 auto;
+}
+
+/* *********************************************** */
+
+.book-details > div {
+	width: 85%;
+	margin: 1em;
+	padding-right: 10px;
+	overflow: hidden;
+	font: normal 0.9em/100% 'ubuntu mono', sans-serif;
+	border-radius: 5px;
+	vertical-align: sub;
+	background-color: white;
+	color: #444;
+}
+
+/* view css */
+
+.tile-small .book-details > div {
+	height: 30px;
+	font: normal 0.9em/100% 'ubuntu mono', sans-serif;
+}
+
+.tile-large .book-details > div {
+	height: 40px;
+	font: normal 1em/100% 'ubuntu mono', sans-serif;
+}
+
+.list .book-details > div {
+	width: auto;
+	margin: .5em 0;
+	background-color: transparent;
+	font: normal 1em/1em 'ubuntu mono', sans-serif;
+	border-radius: 0;
+}
+
+.list .book-details > div:nth-child(1) {
+	padding: 0;
+	height: auto; width: auto;
+	font: normal 1.4em/1em 'ubuntu mono', sans-serif;
+}
+
+.list .book-details > div:nth-child(n+2) {
+	float: left;
+	padding: 0 20px;
+	border-right: 2px solid #999;
+}
+
+.list .book-details > div:last-child { border-right: none; }
+.list .book-details > div:nth-child(2) { padding: 0 20px 0 0; }
+.list .book-details > div:nth-child(2):before { content: 'ISBN: '; }
+.list .book-details > div:nth-child(3):before { content: 'Authors: '; }
+.list .book-details > div:nth-child(5):before { content: 'Publisher: '; }
+.list .book-details > div:nth-child(6):before { content: 'Pages: '; }
+
+
+/* *********************************************** */
+
+.book-details > div > div {
+	display: inline-block;
+	margin-right: 10px;
+	height: 100%;
+	font-size: 1.2em;
+	background-color: #579FFE;
+	color: white;
+	text-align: center;
+}
+
+/* view css */
+.tile-small .book-details > div > div {
+	padding: 7px;
+}
+
+.tile-large .book-details > div > div {
+	padding: 10px;
+}
+
+.list .book-details > div > div {
+	display: none;
+}
+
+/* *********************************************** */
+
+.book-name {
+	overflow: hidden;
+	margin: 0;
+	padding-top: 5px;
+	height: 10%;
+	color: #555;
+}
+
+/* view css */
+.tile-small .book-name {
+	font: normal 0.9em/2em 'track';
+}
+
+.tile-large .book-name {
+	font: normal 1em/2.5em 'track';
+}
+
+/* in list view, .book-name is prepended to .book-details */
+
+/*
+****************************************
+-------  Media query for phones
+****************************************
+*/
+
+@media only screen and (max-width: 480px) {
+	#search-bar {
+		width: 100%;
+		max-width: 100%;
+		min-width: 100%;
+		margin-bottom: 10px;
+	}
+	.list .book-frame {
+		height: 130px;
+	}
+	.list .book-inner-frame {
+		padding: 5px
+	}
+	.list .book-details {
+		width: 100%;
+	}
+	.list .book-details > div {
+		margin: .2em 0;
+	}
+	.list .book-details > div:nth-child(1) {
+		text-align: center;
+		margin: .3em 0 .5em;
+		font: normal 1.2em/1em 'ubuntu mono', sans-serif;
+	}
+	.list .book-details > div:nth-child(n+2) {
+		display: block;
+		border: none;
+		float: none;
+		padding-left: 10px;
+		margin: 5px 0;
+
+	}
+}
+
+/* *********************************************** */

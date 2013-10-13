@@ -1,10 +1,12 @@
 import re
+import json
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
+from django.core import serializers
 
-from opac.models import *
+from opac.models import Book, BookCopy
 
 def forward(request):
 	return HttpResponseRedirect('search/')
@@ -12,20 +14,21 @@ def forward(request):
 def normalize_query(query_string,
 					findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
 					normspace=re.compile(r'\s{2,}').sub):
-	''' Splits the query string in invidual keywords.
+	'''
+	Splits the query string in invidual keywords.
 
-		Also removes unecessary spaces and grouping quoted words together.
-		returns a list of keywords
-		Example:
-		>>> normalize_query('  some random  words "with   quotes  " and   spaces')
-		['some', 'random', 'words', 'with quotes', 'and', 'spaces']
+	Also removes unecessary spaces and grouping quoted words together.
+	returns a list of keywords
+	Example:
+	>>> normalize_query('  some random  words "with   quotes  " and   spaces')
+	['some', 'random', 'words', 'with quotes', 'and', 'spaces']
 	'''
 	return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
 
 def get_query(query_string, search_fields):
-	''' Returns a query, that is a combination of Q objects. That combination
-		aims to search keywords within a model by testing the given search fields.
-
+	'''
+	Returns a query, that is a combination of Q objects. That combination
+	aims to search keywords within a model by testing the given search fields.
 	'''
 	# Query to search for every search term
 	query = None
@@ -47,25 +50,18 @@ def get_query(query_string, search_fields):
 
 
 def index(request):
-	bookexists = False
-	query_string = ''
-
-	if 'q' in request.GET and request.GET['q']:
-		query_string = request.GET['q']
-
-		query_list = get_query(query_string, ['title', 'publisher','author__name'])
-
-		book_list = Book.objects.filter(query_list).order_by('title')
-
-		if book_list:
-			bookexists = True
-
-		return render (request, 'opac/search_results.html', {
-			'books': book_list,
-			'q': query_string,
-			'bookexists': bookexists
-		})
-
+	query_string = request.GET.get('q', '')
+	spaces = re.compile(r' +')
+	if query_string != '':
+		if spaces.match(query_string):
+			return HttpResponse('[]', content_type='application/json')
+		else:
+			query_list = get_query(query_string, ['title', 'publisher','authors'])
+			books = Book.objects.filter(query_list).order_by('title')
+			opac_fields = ('title', 'edition', 'isbn', 'authors', 'publisher',
+				'pages', 'imageurl', 'remarks',)
+			book_json = serializers.serialize('json', books, fields=opac_fields)
+			return HttpResponse(book_json, content_type='application/json')
 	else:
 		return render(request, 'opac/search.html')
 

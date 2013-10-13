@@ -15,13 +15,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.mysql',
+		'ENGINE': 'django.db.backends.sqlite3',
 		 # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-		'NAME': 'cope',
+		'NAME': 'cope.db',
 		# Or path to database file if using sqlite3.
 		# The following settings are not used with sqlite3:
-		'USER': 'sourabh',
-		'PASSWORD': 'terminator',
+		'USER': '',
+		'PASSWORD': '',
 		'HOST': '127.0.0.1',
 		# Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
 		'PORT': '3306',
@@ -79,7 +79,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-	# os.path.join(PROJECT_PATH, 'static'),
+	os.path.join(os.path.join(PROJECT_PATH, 'cope'), 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -123,7 +123,6 @@ DJANGO_APPS = (
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
-	# 'django.contrib.sites',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'django.contrib.admin',
@@ -131,11 +130,10 @@ DJANGO_APPS = (
 
 LOCAL_APPS = (
 	'opac',
+	'transactions',
 )
 
 THIRD_PARTY_APPS = (
-	# 'brillixy',
-    # 'grappelli',
 	'bootstrap_admin',
 )
 

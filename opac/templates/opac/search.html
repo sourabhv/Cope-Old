@@ -2,26 +2,52 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="image/png" href="{{ STATIC_URL}}images/favicon.png">
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/webfonts.css">
-	<link id="theme-css" rel="stylesheet" href="{{ STATIC_URL }}css/search-day.css">
+	<script src="{{ STATIC_URL}}js/jquery.min.js"></script>
+	<script src="{{ STATIC_URL}}js/mustache.js"></script>
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="icon" type="image/png" href="{{ STATIC_URL}}images/favicon.png">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/search.css">
 	<title>Library Search | Cope</title>
 </head>
-<body>
+<body id="day">
 	<div id="container">
 		<div id="logo">
 			<h1>COPE</h1>
+			<h3>By &nbsp; C&lt;&gt;NTAGIOUS</h3>
 		</div>
-		<form action="" method="get" id="search-form">
-			<input type="text" name='q' id='q' placeholder="Search a book">
-			<span class="icon-search"></span>
-		</form>
-	</div>
+		<header class="first-search">
+			<div id="view-buttons">
+				<div data-sizeClass="tile-small" class="active"><i class="icon-th"></i></div>
+				<div data-sizeClass="tile-large"><i class="icon-th-large"></i></div>
+				<div data-sizeClass="list"><i class="icon-reorder"></i></div>
+			</div>
+			<div id="search-bar">
+				<input type="input" name='q' id='q' placeholder="Search a book" autocomplete="off">
+				<span class="icon-search"></span>
+			</div>
+			<button id="search-button">Search</button>
+		</header>
 
-	<span id="theme-button"><i class="icon-moon"></i></span>
+		<div id="book-container" class="tile-small">
+<!--
+ 				<div class="book-frame">
+				<div class="book-inner-frame">
+					<img src="/static/images/grayhat.png">
+					<div class="book-details">
+						<div><div><i class="icon-book"></i></div>64646416478646</div>
+						<div><div><i class="icon-user"></i></div>Seitz</div>
+						<div><div><i class="icon-file-text"></i></div>Edition: 1</div>
+						<div><div><i class="icon-truck"></i></div>No Starch Press</div>
+						<div><div><i class="icon-copy"></i></div>666</div>
+					</div>
+				</div>
+				<div class="book-name">Gray Hat Python</div>
+			</div>
+ -->
+		</div> <!-- book-container end -->
+	</div> <!-- container end -->
 
-	<script src="{{ STATIC_URL }}js/search-script.js"></script>
+	<script src="{{ STATIC_URL }}js/search.js"></script>
 </body>
 </html>
+
