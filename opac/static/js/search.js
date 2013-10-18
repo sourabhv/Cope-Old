@@ -2,12 +2,12 @@
 
 	var $logo = $('#logo');
 	var $q = $('#q');
-	var $search_button = $('#search-button')
 	var $view_buttons = $('#view-buttons').children('div');
 	var $book_container = $('#book-container');
 	var queryStringPrev = '';
 
-	$book_container.css({'min-height': $(window).innerHeight() + 'px'});
+	var min_height = $(window).innerHeight() - 70 - $('#container').children('header').outerHeight(true);
+	$book_container.css({'min-height': min_height + 'px'});
 
 	$q.on('input', function (e) {
 		$('#container').animate({scrollTop: $logo.outerHeight()}, 500);
@@ -35,21 +35,26 @@
 		}
 	});
 
-	$search_button.on('click', function (e) {
-		queryStringPrev = books_ajax_request($q.value, queryStringPrev);
+	$('#search-button').on('click', function () {
+		queryStringPrev = books_ajax_request(document.getElementById('q').value, queryStringPrev);
 	});
 
 	$q.on('keydown', function (e) {
 		if (e.which == 13) {
 			queryStringPrev = books_ajax_request(this.value, queryStringPrev);
+			this.select();
 		}
 	})
 }) (jQuery);
 
 function books_ajax_request (queryString, queryStringPrev) {
 	var $ = jQuery;
+	var $title = $('title');
+
 	queryString = $.trim(queryString)
-	if (queryString.length > 0 && queryString != queryStringPrev) {
+	if (queryString.length == 0) {
+		$('#book-container').empty();
+	} else if (queryString != queryStringPrev) {
 		$.ajax({
 			type: 'GET',
 			url: '/search/',
@@ -57,12 +62,12 @@ function books_ajax_request (queryString, queryStringPrev) {
 			content_type: 'application/json',
 			dataType: 'json',
 			success: function (data, statusText, jqXHR) {
-				// console.log('success::statusText: ' + statusText);
 				make_book_container(data);
+				// history.pushState(null, queryString + ' | Cope', '?q='+queryString);
+				document.title = queryString + ' | Cope | Library Search';
 			},
 			error: function (jqXHR, statusText, errorThrown) {
-				console.log('error::statusText: ' + statusText);
-				console.log('error::errorThrown: ' + errorThrown);
+				// code
 			}
 		})
 	}
@@ -72,16 +77,46 @@ function books_ajax_request (queryString, queryStringPrev) {
 
 function make_book_container (BooksJSON) {
 	var $ = jQuery;
-	var book_frame_tile_template = '<div class=\"book-frame\"> <div class=\"book-inner-frame\"> <img src=\"/static/images/{{ imageurl}}\"> <div class=\"book-details\"> <div><div><i class=\"icon-book\"></i></div>{{ isbn }}</div> <div><div><i class=\"icon-user\"></i></div>{{ authors }}</div> <div><div><i class=\"icon-file-text\"></i></div>Edition: {{ edition }}</div> <div><div><i class=\"icon-truck\"></i></div>{{ publisher }}</div> <div><div><i class=\"icon-copy\"></i></div>{{ pages }}</div> </div> </div> <div class=\"book-name\">{{ title }}</div> </div>';
-	var book_frame_list_template = '<div class=\"book-frame\"> <div class=\"book-inner-frame\"> <img src=\"/static/images/djangoajax.png\"> <div class=\"book-details\"> <div class=\"book-name\">{{ title }}</div> <div><div><i class=\"icon-book\"></i></div>{{ isbn }}</div> <div><div><i class=\"icon-user\"></i></div>{{ authors }}</div> <div><div><i class=\"icon-file-text\"></i></div>Edition: {{edition}}</div> <div><div><i class=\"icon-truck\"></i></div>{{ publisher }}</div> <div><div><i class=\"icon-copy\"></i></div>{{ pages }}</div> </div> </div> </div>';
-	$book_container = $('#book-container')
+	var $book_container = $('#book-container')
+
+	var book_frame_tile_template = '\
+<div class="book-frame" data-id="{{ pk }}">\
+	<div class="book-inner-frame">\
+		<img src="/static/images/{{ fields.imageurl}}" onError="this.onerror=null;this.src=\'/static/images/fallback_image.png\'">\
+		<div class="book-details">\
+			<div><div><i class="icon-user"></i></div>{{ fields.authors }}</div>\
+			<div><div><i class="icon-file-text"></i></div>Edition: {{ fields.edition }}</div>\
+			<div><div><i class="icon-truck"></i></div>{{ fields.publisher }}</div>\
+			<div><div><i class="icon-book"></i></div>{{ fields.isbn }}</div>\
+			<div><div><i class="icon-copy"></i></div>Copies left: {{ fields.copies_available }}</div>\
+		</div>\
+	</div>\
+	<div class="book-name">{{ fields.title }}</div>\
+</div>';
+
+	var book_frame_list_template = '\
+<div class="book-frame" data-id={{ pk }}>\
+	<div class="book-inner-frame">\
+		<img src="/static/images/djangoajax.png" onError="this.onerror=null;this.src=\'/static/images/fallback_image.png\'">\
+		<div class="book-details">\
+			<div class="book-name">{{ fields.title }}</div>\
+			<div><div><i class="icon-user"></i></div>{{ fields.authors }}</div>\
+			<div><div><i class="icon-file-text"></i></div>Edition: {{fields.edition}}</div>\
+			<div><div><i class="icon-truck"></i></div>{{ fields.publisher }}</div>\
+			<div><div><i class="icon-book"></i></div>{{ fields.isbn }}</div>\
+			<div><div><i class="icon-copy"></i></div>Copies left: {{ fields.copies_available }}</div>\
+		</div>\
+	</div>\
+</div>';
+
 	$book_container.empty();
-	// $book_container.html(JSON.stringify(BooksJSON, '', 4))
 	$.each(BooksJSON, function () {
 		if ($book_container.hasClass('list'))
-			var book_frame_html = Mustache.to_html(book_frame_list_template, this.fields);
+			var book_frame_html = Mustache.to_html(book_frame_list_template, this);
 		else
-			var book_frame_html = Mustache.to_html(book_frame_tile_template, this.fields);
+			var book_frame_html = Mustache.to_html(book_frame_tile_template, this);
 		$book_container.append(book_frame_html);
 	})
+
+	// $book_container.html(JSON.stringify(BooksJSON, '', 4));
 }

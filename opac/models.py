@@ -6,6 +6,12 @@ from django.utils import timezone
 from transactions.models import EndUser
 
 class Book(models.Model):
+	'''
+	Part of accessing register enlisting book details.
+	Contains general details relative to a book e.g. title, author,
+	edition, publisher etc.
+	'''
+
 	# book information
 	date = models.DateField(auto_now_add=True, verbose_name='cataloguing date')
 	title = models.CharField(max_length=50)
@@ -26,6 +32,10 @@ class Book(models.Model):
 	imageurl = models.CharField(max_length=50, blank=True)
 	remarks = models.TextField(blank=True)
 
+	@property
+	def copies_available(self):
+		return self.copies.filter(issued_to__isnull=True).count()
+
 	def __init__(self, *args, **kwargs):
 		super(Book, self).__init__(*args, **kwargs)
 		if self.authors == '':
@@ -34,16 +44,7 @@ class Book(models.Model):
 	def __unicode__(self):
 		return '%s | %s' % (self.title, self.isbn)
 
-	# def copied_available(self):
-	# 	pass
-
-
 class BookCopy(models.Model):
-	'''
-	Part of accessing register enlisting book details.
-	Contains general details relative to a book e.g. title, author,
-	edition, publisher etc.
-	'''
 
 	date = models.DateField(auto_now_add=True, verbose_name='cataloguing date')
 	book_number = models.IntegerField(verbose_name='book number')
@@ -66,4 +67,4 @@ class BookCopy(models.Model):
 
 
 	def __unicode__(self):
-		return self.book_number
+		return 'Book Copy Number: %d' % self.book_number

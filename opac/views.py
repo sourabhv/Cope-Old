@@ -1,15 +1,40 @@
 import re
-import json
+from StringIO import StringIO
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
-from django.core import serializers
+# from django.core import serializers
+from django.core.serializers.json import Serializer
 
 from opac.models import Book, BookCopy
 
-def forward(request):
-	return HttpResponseRedirect('search/')
+class JSONSerializer(Serializer):
+	'''
+	JSON serialize to serialize db fields and properties
+
+	Example:
+	>>> JSONSerializer().serialize(Model.objects.all(), ('field1', 'field2',))
+	'''
+	def serialize(self, queryset, attributes, **options):
+		self.options = options
+		self.stream = options.get("stream", StringIO())
+		self.start_serialization()
+		self.first = True
+
+		for obj in queryset:
+			self.start_object(obj)
+			for field in attributes:
+				self.handle_field(obj, field)
+			self.end_object(obj)
+			if self.first:
+				self.first = False
+		self.end_serialization()
+		return self.getvalue()
+
+	def handle_field(self, obj, field):
+		self._current[field] = getattr(obj, field)
+
 
 def normalize_query(query_string,
 					findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
@@ -48,22 +73,58 @@ def get_query(query_string, search_fields):
 			query = query | term_query
 	return query
 
+def forward(request):
+	return HttpResponseRedirect('search/')
 
 def index(request):
 	query_string = request.GET.get('q', '')
-	spaces = re.compile(r' +')
+	spaces = re.compile(r'[ \t]+')
 	if query_string != '':
-		if spaces.match(query_string):
-			return HttpResponse('[]', content_type='application/json')
+		if request.is_ajax():
+			opac_fields = ('title', 'edition', 'isbn', 'authors', 'publisher',
+				'pages', 'imageurl', 'remarks', 'copies_available',)
+			serializer = JSONSerializer()
+			if spaces.match(query_string):
+				books_json = '[]'
+			elif query_string == 'opac.models.Book --all':
+				books = Book.objects.all().order_by('title')
+				books_json = serializer.serialize(books, attributes=opac_fields)
+			else:
+				query_list = get_query(query_string, ['title', 'publisher','authors'])
+				books = Book.objects.filter(query_list).order_by('title')
+				books_json = serializer.serialize(books, attributes=opac_fields)
+
+			return HttpResponse(books_json, content_type='application/json')
+
 		else:
 			query_list = get_query(query_string, ['title', 'publisher','authors'])
 			books = Book.objects.filter(query_list).order_by('title')
-			opac_fields = ('title', 'edition', 'isbn', 'authors', 'publisher',
-				'pages', 'imageurl', 'remarks',)
-			book_json = serializers.serialize('json', books, fields=opac_fields)
-			return HttpResponse(book_json, content_type='application/json')
+			return render(request, 'opac/search.html', {
+				'q': query_string,
+				'books': books
+			})
 	else:
 		return render(request, 'opac/search.html')
+
+# def index(request):
+# 	query_string = request.GET.get('q', '')
+# 	spaces = re.compile(r' +')
+# 	if query_string != '':
+# 		opac_fields = ('title', 'edition', 'isbn', 'authors', 'publisher',
+# 			'pages', 'imageurl', 'remarks', 'copies_available',)
+# 		if spaces.match(query_string):
+# 			books_json = '[]'
+# 		elif query_string == 'opac.models.Book --all':
+# 			books = Book.objects.all().order_by('title')
+# 			books_json = serializers.serialize('json', books, fields=opac_fields)
+# 		else:
+# 			query_list = get_query(query_string, ['title', 'publisher','authors'])
+# 			books = Book.objects.filter(query_list).order_by('title')
+# 			books_json = serializers.serialize('json', books, fields=opac_fields)
+
+# 		return HttpResponse(books_json, content_type='application/json')
+# 	else:
+# 		return render(request, 'opac/search.html')
 
 def get_book(request, book_id):
 	book = Book.objects.get(pk=book_id)
